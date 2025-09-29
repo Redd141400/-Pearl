@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Giant Red Button</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="closeBtn">DO NOT PRESS</button>
+
+  <script>
+    document.getElementById("closeBtn").addEventListener("click", function () {
+    
+      window.close();
+
+      
+     
+    });
+  </script>
+  <style>
+    body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111;
+}
+
+#closeBtn {
+  font-size: 3rem;
+  padding: 2rem 4rem;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.7);
+  transition: transform 0.2s;
+}
+
+#closeBtn:hover {
+  transform: scale(1.1);
+}
+  </style>
+</body>
+</html>

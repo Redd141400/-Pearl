@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clicker Game with Upgrades</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <img id="coin" src="YOUR IMAGE HERE" />
+  <div class="container">
+    <h1>💰 Gold Clicker</h1>
+    <p>Gold: <span id="gold">0</span></p>
+
+    <!-- Clickable Animated Icon -->
+    <img id="coin" src="https://img.icons8.com/emoji/96/coin-emoji.png" alt="coin" />
+
+    <!-- Upgrade Shop -->
+    <div class="shop">
+      <h2>Upgrades</h2>
+      <button id="upgradeBtn">
+        Upgrade Click (+1 Gold per click) — Cost: <span id="upgradeCost">10</span>
+      </button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+<style>
+    body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #1e1e2f;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  background: #2c2c3e;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  width: 90%;
+  max-width: 400px;
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+#coin {
+  width: 96px;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  margin: 1rem 0;
+}
+
+#coin:active {
+  transform: scale(0.9);
+}
+
+.shop {
+  margin-top: 2rem;
+}
+
+button {
+  background-color: #ffc107;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #e0a800;
+}
+</style>
+<script>
+let gold = parseInt(localStorage.getItem("gold")) || 0;
+let goldPerClick = parseInt(localStorage.getItem("goldPerClick")) || 1;
+let upgradeCost = parseInt(localStorage.getItem("upgradeCost")) || 10;
+
+const goldDisplay = document.getElementById("gold");
+const coin = document.getElementById("coin");
+const upgradeBtn = document.getElementById("upgradeBtn");
+const upgradeCostDisplay = document.getElementById("upgradeCost");
+
+function updateUI() {
+  goldDisplay.textContent = gold;
+  upgradeCostDisplay.textContent = upgradeCost;
+}
+
+function saveGame() {
+  localStorage.setItem("gold", gold);
+  localStorage.setItem("goldPerClick", goldPerClick);
+  localStorage.setItem("upgradeCost", upgradeCost);
+}
+
+coin.addEventListener("click", () => {
+  gold += goldPerClick;
+
+  // Animation: bounce effect
+  coin.style.transform = "scale(1.2)";
+  setTimeout(() => {
+    coin.style.transform = "scale(1)";
+  }, 100);
+
+  updateUI();
+  saveGame();
+});
+
+upgradeBtn.addEventListener("click", () => {
+  if (gold >= upgradeCost) {
+    gold -= upgradeCost;
+    goldPerClick += 1;
+    upgradeCost = Math.floor(upgradeCost * 1.5);
+    updateUI();
+    saveGame();
+  } else {
+    alert("Not enough gold!");
+  }
+});
+
+// Initial UI setup
+updateUI();
+</script>
+</html>
