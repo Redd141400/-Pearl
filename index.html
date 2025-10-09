@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grade Calculator</title>
+</head>
+<body>
+    <h2>Grade Calculator</h2>
+    <label for="score">Enter your score (0-100): </label>
+    <input type="number" id="score" min="0" max="100">
+    <button onclick="calculateGrade()">Calculate Grade</button>
+
+    <p id="result"></p>
+
+    <script>
+        function calculateGrade() {
+            const score = parseInt(document.getElementById('score').value);
+            let grade = '';
+            let message = '';
+
+            if (isNaN(score) || score < 0 || score > 100) {
+                grade = '';
+                message = 'Please enter a valid score between 0 and 100.';
+            } else if (score >= 90) {
+                grade = 'A';
+                message = 'Excellent work! Keep it up!';
+            } else if (score >= 80) {
+                grade = 'B';
+                message = 'Great job! You\'re doing well!';
+            } else if (score >= 75) {
+                grade = 'C+';
+                message = 'Good effort! You\'re getting there!';
+            } else if (score >= 50) {
+                grade = (score >= 70) ? 'C' : 'D';
+                message = 'You can do better! Keep trying!';
+            } else {
+                grade = 'F';
+                message = 'Uh-oh, you need to work harder. Don\'t give up!';
+            }
+
+            document.getElementById('result').textContent = 
+                'Your grade is: ' + grade + (message ? ' — ' + message : '');
+        }
+    </script>
+</body>
+</html>
