@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Number Grid</title>
+  <style>
+    body {
+      font-family: monospace;
+      white-space: pre;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="output"></div>
+
+  <script>
+    const outputDiv = document.getElementById('output');
+    let result = '';
+
+    for (let i = 0; i < 10; i++) {
+      let line = '';
+      for (let j = 0; j < 10; j++) {
+        let num = i.toString() + j.toString();
+        line += num + ' ';
+      }
+      console.log(line);  
+      result += line + '\n';
+    }
+
+    outputDiv.textContent = result;
+  </script>
+</body>
+</html>
