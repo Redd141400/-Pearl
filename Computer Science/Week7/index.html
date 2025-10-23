@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Number Tally and Average</title>
+</head>
+<body>
+  <h1>Random Number Generator</h1>
+  <button onclick="generateRandomNumber()">Generate Number</button>
+  
+  <p id="random-number">Generated Number: </p>
+  <p id="average">Average: </p>
+  <h3>Tally:</h3>
+  <ul id="tally-list"></ul>
+
+  <script>
+    let tally = Array(11).fill(0); // Index 1-10 used, ignore index 0
+    let total = 0;
+    let count = 0;
+
+    function generateRandomNumber() {
+      const num = Math.floor(Math.random() * 10) + 1;
+      tally[num]++;
+      total += num;
+      count++;
+
+      document.getElementById("random-number").textContent = "Generated Number: " + num;
+      document.getElementById("average").textContent = "Average: " + (total / count).toFixed(2);
+
+      updateTallyDisplay();
+    }
+
+    function updateTallyDisplay() {
+      const list = document.getElementById("tally-list");
+      list.innerHTML = "";
+
+      let i = 1;
+      while (i <= 10) {
+        const li = document.createElement("li");
+        li.textContent = `Number ${i}: ${tally[i]} time(s)`;
+        list.appendChild(li);
+        i++;
+      }
+    }
+  </script>
+</body>
+</html>
