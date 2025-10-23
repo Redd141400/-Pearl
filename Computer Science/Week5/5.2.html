@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ticket Price Calculator</title>
+</head>
+<body>
+  <h2>Ticket Price Calculator</h2>
+
+  <label for="age">Age:</label>
+  <input type="number" id="age" min="0" /><br /><br />
+
+  <label for="gender">Gender:</label>
+  <select id="gender">
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+  </select><br /><br />
+
+  <button id="buyTicket">Buy Ticket</button>
+
+  <h3 id="output"></h3>
+
+  <script>
+    document.getElementById('buyTicket').addEventListener('click', () => {
+      const age = parseInt(document.getElementById('age').value);
+      const gender = document.getElementById('gender').value;
+      const output = document.getElementById('output');
+
+      if (isNaN(age) || age < 0) {
+        output.textContent = "Please enter a valid age.";
+        return;
+      }
+
+      let price = 0;
+
+      if (age > 18) {
+        price = 21.00;
+      } else if (age >= 12) {
+        price = 14.00;
+      } else {
+        price = 7.00;
+      }
+
+      if (gender === 'female') {
+        price = price * 0.75; // 25% discount
+      }
+
+      output.textContent = `Your ticket price is $${price.toFixed(2)}`;
+    });
+  </script>
+</body>
+</html>
